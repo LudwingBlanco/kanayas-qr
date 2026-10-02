@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kanayas | Papas, chorizos y parrilla en La Cumbre, Floridablanca</title>
+<meta name="description" content="Kanayas: papas locas, chorizos caramelizados, costillas ahumadas y más. Arma tu pedido y envíalo por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat+Brush&family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="fotos-respaldo.js"></script>
+</head>
+<body>
+
+<div class="loader" id="loader">
+  <div class="ld-word">KANAYAS</div>
+  <div class="ld-wrap">
+    <div class="ld-meta"><span>Calentando la plancha</span><b><span id="ldNum">00</span>%</b></div>
+    <div class="ld-bar"><i id="ldBar"></i></div>
+  </div>
+</div>
+
+<header class="nav">
+  <a class="logo" href="#inicio">Kanayas</a>
+  <nav><a href="#historia">Nosotros</a><a href="#menu">Menú</a><a href="#donde">Ubicación</a><a href="mesero.html">Meseros</a></nav>
+  <button class="cart-btn" id="cartBtn" aria-label="Abrir pedido">Mi pedido <b id="cartCount">0</b></button>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <h1 class="hero-words" aria-label="Sabor que tienes que probar">
+    <span class="hw"><em>SABOR</em></span>
+    <span class="hw o"><em>QUE TIENES</em></span>
+    <span class="hw"><em>QUE PROBAR</em></span>
+  </h1>
+  <div class="hero-photo">
+    <img src="img/papas.jpg" alt="Papas Locas Porcinas de Kanayas" id="heroImg" onerror="imgFallback(this)">
+    <div class="stamp" aria-hidden="true"><span>SOLO EN KANAYAS ★ SOLO EN KANAYAS ★</span></div>
+  </div>
+  <div class="hero-foot">
+    <p>Papas, chorizos, costillas y más.<br>La Cumbre, Floridablanca.</p>
+    <a class="btn" href="#menu">Pedir ahora</a>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="track">
+  <span>Papas Locas</span><span>Chorizos Caramelizados</span><span>Costillas Ahumadas</span><span>Titanic</span><span>Parrillada</span>
+  <span>Papas Locas</span><span>Chorizos Caramelizados</span><span>Costillas Ahumadas</span><span>Titanic</span><span>Parrillada</span>
+</div></div>
+
+<section class="story" id="historia">
+  <p class="tag">Nosotros</p>
+  <p class="big" id="bigText">Comida que se prepara al momento, con porciones generosas y sabor de casa. Para compartir con amigos, con la familia o para ti solo. Eso es Kanayas, en el corazón de La Cumbre.</p>
+  <div class="story-imgs">
+    <figure class="p1"><img src="img/chorizos.jpg" alt="Chorizos caramelizados" loading="lazy" onerror="imgFallback(this)"></figure>
+    <figure class="p2"><img src="img/costillas.jpg" alt="Costillas ahumadas" loading="lazy" onerror="imgFallback(this)"></figure>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <p class="tag">El menú</p>
+  <h2>Escoge lo que se te antoja</h2>
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="visit" id="donde">
+  <p class="tag">Visítanos</p>
+  <h2>Ven por el tuyo</h2>
+  <p class="addr">La Cumbre, Floridablanca, Santander.<br><small>Horarios: por confirmar.</small></p>
+  <div class="links">
+    <a class="btn" href="#" id="mapsLink" target="_blank" rel="noopener">Cómo llegar</a>
+    <a class="btn ghost" href="#" id="igLink" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="giant" id="giant">KANAYAS</div>
+  <p>© <span id="year"></span> Kanayas · La Cumbre, Floridablanca</p>
+</footer>
+
+<aside class="drawer" id="drawer" aria-label="Tu pedido">
+  <div class="drawer-head"><h3>Tu pedido</h3><button id="closeCart" aria-label="Cerrar">✕</button></div>
+  <ul id="cartList"></ul>
+  <div class="drawer-foot">
+    <p class="total">Total <b id="cartTotal">$0</b></p>
+    <input id="clientName" type="text" placeholder="Tu nombre" autocomplete="name">
+    <button class="btn qr-generate" id="generateQR" type="button">Generar QR para el mesero</button>
+    <a class="btn wa" id="sendWa" href="#">Enviar pedido por WhatsApp</a>
+  </div>
+</aside>
+<div class="scrim" id="scrim"></div>
+<div class="modal" id="modal" aria-hidden="true" data-lenis-prevent>
+  <div class="m-card" role="dialog" aria-modal="true" aria-labelledby="mName">
+    <button class="m-close" id="mClose" aria-label="Cerrar">✕</button>
+    <div class="m-photo"><img id="mImg" alt="" onerror="imgFallback(this)"></div>
+    <div class="m-info">
+      <p class="tag">Lo que lleva</p>
+      <h3 id="mName"></h3><p id="mDesc" class="m-desc"></p>
+      <p class="hint">Toca un ingrediente para quitarlo de tu pedido</p>
+      <ul id="mIngs"></ul>
+      <div id="mExtras"></div>
+      <textarea id="mNote" rows="2" placeholder="¿Alguna nota? (ej: bien cocido, poco picante)"></textarea>
+      <div class="m-foot"><span id="mPrice"></span><button class="btn" id="mAdd">Agregar al pedido</button></div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast">Agregado al pedido ✓</div>
+
+<!-- QR DEL PEDIDO -->
+<div class="modal qr-modal" id="qrModal" aria-hidden="true">
+  <div class="qr-card" role="dialog" aria-modal="true" aria-labelledby="qrTitle">
+    <button class="m-close" id="qrClose" aria-label="Cerrar">✕</button>
+    <div class="qr-head">
+      <p class="tag">Pedido listo</p>
+      <h3 id="qrTitle">Escanea este código</h3>
+      <p>Muéstraselo al mesero. Él lo escaneará desde su celular para recibir tu pedido completo.</p>
+    </div>
+    <div class="qr-box"><div id="orderQR"></div></div>
+    <div class="qr-code-text">
+      <span>Código de pedido</span>
+      <b id="orderCode">KAN-0000</b>
+    </div>
+    <div class="qr-summary" id="qrSummary"></div>
+    <button class="btn qr-close-btn" id="qrDone">Listo</button>
+  </div>
+</div>
+
+<!-- QRCode.js: generación del QR en el celular del cliente -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="menu.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
